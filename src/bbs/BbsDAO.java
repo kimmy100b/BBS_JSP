@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class BbsDAO {
 
@@ -70,6 +71,30 @@ public class BbsDAO {
 			e.printStackTrace();
 		}
 		return -1; // 데이터베이스 오류
+	}
+	
+	public ArrayList<Bbs> getList(int pageNumber){
+		String SQL = "SELECT * FROM bbs WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10";
+		ArrayList<Bbs> list = new ArrayList<Bbs>();
+
+		try {
+			PreparedStatement pstm = conn.prepareStatement(SQL);
+			pstm.setInt(1, getNext()-(pageNumber -1)*10);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				Bbs bbs = new Bbs();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setUserID(rs.getString(3));
+				bbs.setBbsContent(rs.getString(4));
+				bbs.setRegDate(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));
+				list.add(bbs);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;		
 	}
 
 }

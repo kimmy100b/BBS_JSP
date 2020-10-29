@@ -113,4 +113,42 @@ public class BbsDAO {
 		return false;
 	}
 
+	public Bbs getBbs(int bbsID) {
+		String SQL = "SELECT * FROM bbs WHERE bbsID = ?";
+
+		try {
+			PreparedStatement pstm = conn.prepareStatement(SQL);
+			pstm.setInt(1, bbsID);
+			rs = pstm.executeQuery();
+			if (rs.next()) {
+				Bbs bbs = new Bbs();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setUserID(rs.getString(3));
+				bbs.setBbsContent(rs.getString(4));
+				bbs.setRegDate(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));
+				return bbs;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public int update(int bbsID, String bbsTitle, String bbsContent) {
+		String SQL = "UPDATE BBS SET bbsTitle = ?, bbsContent = ? WHERE bbsID = ?";
+
+		try {
+			PreparedStatement pstm = conn.prepareStatement(SQL);
+			pstm.setString(1, bbsTitle);
+			pstm.setString(2, bbsContent);
+			pstm.setInt(3, bbsID);
+			return pstm.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1; // 데이터베이스 오류
+	}
+
 }

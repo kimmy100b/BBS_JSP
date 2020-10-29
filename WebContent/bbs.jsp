@@ -77,10 +77,10 @@
 				</thead>
 				<tbody>
 					<tr>
-					<td>1</td>
-					<td>안녕하세요</td>
-					<td>홍길동</td>
-					<td>2020-10-28</td>
+						<td>1</td>
+						<td>안녕하세요</td>
+						<td>홍길동</td>
+						<td>2020-10-28</td>
 					</tr>
 				</tbody>
 			</table>

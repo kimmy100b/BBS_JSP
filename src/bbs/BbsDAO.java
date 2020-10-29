@@ -72,14 +72,14 @@ public class BbsDAO {
 		}
 		return -1; // 데이터베이스 오류
 	}
-	
-	public ArrayList<Bbs> getList(int pageNumber){
+
+	public ArrayList<Bbs> getList(int pageNumber) {
 		String SQL = "SELECT * FROM bbs WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10";
 		ArrayList<Bbs> list = new ArrayList<Bbs>();
 
 		try {
 			PreparedStatement pstm = conn.prepareStatement(SQL);
-			pstm.setInt(1, getNext()-(pageNumber -1)*10);
+			pstm.setInt(1, getNext() - (pageNumber - 1) * 10);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
 				Bbs bbs = new Bbs();
@@ -94,7 +94,23 @@ public class BbsDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return list;		
+		return list;
+	}
+
+	public boolean nextPage(int pageNumber) {
+		String SQL = "SELECT * FROM bbs WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10";
+
+		try {
+			PreparedStatement pstm = conn.prepareStatement(SQL);
+			pstm.setInt(1, getNext() - (pageNumber - 1) * 10);
+			rs = pstm.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

@@ -48,11 +48,11 @@ public class Bbs {
 		this.regDate = regDate;
 	}
 
-	public int getBbsAvaliable() {
-		return bbsAvaliable;
+	public int getBbsAvailable() {
+		return bbsAvailable;
 	}
 
 	public void setBbsAvailable(int bbsAvailable) {
-		this.bbsAvaliable = bbsAvaliable;
+		this.bbsAvailable = bbsAvailable;
 	}
 }

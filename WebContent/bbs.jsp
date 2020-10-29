@@ -31,8 +31,8 @@
 		</div>
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item active"><a class="nav-link" href="main.jsp">메인</a></li>
-				<li class="nav-item"><a class="nav-link" href="bbs.jsp">게시판</a></li>
+				<li class="nav-item"><a class="nav-link" href="main.jsp">메인</a></li>
+				<li class="nav-item active"><a class="nav-link" href="bbs.jsp">게시판</a></li>
 			</ul>
 			<%
 				if (userID == null) {
@@ -62,6 +62,32 @@
 			%>
 		</div>
 	</nav>
+
+	<div class="container">
+		<div class="row">
+			<table class="table table-striped"
+				style="text-align: center; border: 1px solid #dddddd">
+				<thead>
+					<tr>
+						<th style="background-color: #eeeeee; text-align: center;">번호</th>
+						<th style="background-color: #eeeeee; text-align: center;">제목</th>
+						<th style="background-color: #eeeeee; text-align: center;">작성자</th>
+						<th style="background-color: #eeeeee; text-align: center;">작성일</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					<td>1</td>
+					<td>안녕하세요</td>
+					<td>홍길동</td>
+					<td>2020-10-28</td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="write.jsp" class="btn btn-primary">글쓰기</a>
+		</div>
+	</div>
+
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 		crossorigin="anonymous"></script>

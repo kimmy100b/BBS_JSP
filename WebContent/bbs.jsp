@@ -13,6 +13,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="css/custom.css">
 <title>JSP 게시판 웹 사이트</title>
 <style type="text/css">
 a, a:hover {
@@ -24,13 +25,13 @@ a, a:hover {
 <body>
 	<%
 		String userID = null;
-	if (session.getAttribute("userID") != null) {
-		userID = (String) session.getAttribute("userID");
-	}
-	int pageNumber = 1;
-	if (request.getParameter("pageNumber") != null) {
-		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-	}
+		if (session.getAttribute("userID") != null) {
+			userID = (String) session.getAttribute("userID");
+		}
+		int pageNumber = 1;
+		if (request.getParameter("pageNumber") != null) {
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
 	%>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="navbar-header">
@@ -91,15 +92,16 @@ a, a:hover {
 				<tbody>
 					<%
 						BbsDAO bbsDAO = new BbsDAO();
-					ArrayList<Bbs> list = bbsDAO.getList(pageNumber);
-					for (int i = 0; i < list.size(); i++) {
+						ArrayList<Bbs> list = bbsDAO.getList(pageNumber);
+						for (int i = 0; i < list.size(); i++) {
 					%>
 					<tr>
 						<td><%=list.get(i).getBbsID()%></td>
-						<td><a href="view.jsp?bbsID=<%=list.get(i).getBbsID()%>"><%=list.get(i).getBbsTitle().replaceAll(" ","&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>")%></a></td>
+						<td><a href="view.jsp?bbsID=<%=list.get(i).getBbsID()%>"><%=list.get(i).getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
+						.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></a></td>
 						<td><%=list.get(i).getUserID()%></td>
 						<td><%=list.get(i).getRegDate().substring(0, 11) + list.get(i).getRegDate().substring(11, 13) + "시 "
-		+ list.get(i).getRegDate().substring(14, 16) + "분"%></td>
+						+ list.get(i).getRegDate().substring(14, 16) + "분"%></td>
 					</tr>
 					<%
 						}
@@ -113,7 +115,7 @@ a, a:hover {
 				class="btn btn-success btn-arrow-left">이전</a>
 			<%
 				}
-			if (bbsDAO.nextPage(pageNumber + 1)) {
+				if (bbsDAO.nextPage(pageNumber + 1)) {
 			%>
 			<a href="bbs.jsp?pageNumber=<%=pageNumber + 1%>"
 				class="btn btn-success btn-arrow-right">다음</a>

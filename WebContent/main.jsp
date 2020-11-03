@@ -63,12 +63,12 @@
 			%>
 		</div>
 	</nav>
-	<div class="container">
+	<div class="container" style="margin-top: 2%;">
 		<div class="jumbotron">
 			<div class="container">
 				<h1>웹 사이트 소개</h1>
 				<p>이 웹 사이트는 부트스트랩으로 만든 JSP 웹 사이트입니다.</p>
-				<a class="btn btn-primary btn-pull" href="#" role="button">자세히
+				<a class="btn btn-primary btn-pull" href="https://github.com/kimmy100b/BBS_JSP" role="button">자세히
 					알아보기</a>
 			</div>
 		</div>

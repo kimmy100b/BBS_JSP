@@ -77,7 +77,7 @@ a, a:hover {
 		</div>
 	</nav>
 
-	<div class="container">
+	<div class="container" style="margin-top: 2%;">
 		<div class="row">
 			<table class="table table-striped"
 				style="text-align: center; border: 1px solid #dddddd">
@@ -121,8 +121,22 @@ a, a:hover {
 				class="btn btn-success btn-arrow-right">다음</a>
 			<%
 				}
+				if (userID == null) {
 			%>
-			<a href="write.jsp" class="btn btn-primary">글쓰기</a>
+			<a onclick="return confirm('로그인하세요');" href="login.jsp"
+				class="btn btn-primary">글쓰기</a>
+			<%
+				} else {
+			%>
+			<div style="width: 100%;">
+				<a href="write.jsp" class="btn btn-primary float-right"
+					role="button">글쓰기</a>
+			</div>
+			<%
+				}
+			%>
+
+
 		</div>
 	</div>
 

@@ -42,9 +42,9 @@
 
 	<div class="container">
 		<div class="col-lg-4"></div>
-		<div class="col-lg-4">
+		<div class="col-lg-4 mx-auto" style="margin-top: 10%;">
 			<div class="jumbotron" style="padding-top: 20px;">
-				<form method="post" action="joinAction.jsp">
+				<form method="post" name="joinForm" action="joinAction.jsp">
 					<h3 style="text-align: center;">회원가입 화면</h3>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="아이디"
@@ -53,6 +53,8 @@
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="비밀번호"
 							name="userPassword" maxlength="20">
+							<p id="pwContent" style="font-size: x-small; color: red;"></p>
+							<p style="font-size: x-small;">※ 비밀번호는 6자리 이상 12자리 미만이여야합니다.</p>
 					</div>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="이름"
@@ -79,6 +81,7 @@
 		</div>
 		<div class="col-lg-4"></div>
 	</div>
+	<script type="text/javascript" src="js/joinCheck.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 		crossorigin="anonymous"></script>

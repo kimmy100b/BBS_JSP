@@ -64,7 +64,7 @@
 		</div>
 	</nav>
 
-	<div class="container">
+	<div class="container" style="margin-top: 2%;">
 		<div class="row">
 			<form method="post" action="writeAction.jsp" style="width: 100%;">
 				<table class="table table-striped"
@@ -88,7 +88,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<input type="submit" class="btn btn-primary float-right" value="글쓰기">
+				<input type="submit" class="btn btn-primary float-right" value="등록">
 			</form>
 		</div>
 	</div>

@@ -20,65 +20,71 @@
 <body>
 	<%
 		String userID = null;
-	if (session.getAttribute("userID") != null) {
-		userID = (String) session.getAttribute("userID");
-	}
+		if (session.getAttribute("userID") != null) {
+			userID = (String) session.getAttribute("userID");
+		}
 
-	if (userID != null) {
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('이미 로그인이 되어있습니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	}
-
-	if (user.getUserID() == null) {
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('아이디가 입력되지 않았습니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	} else if (user.getUserPassword() == null) {
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('비밀번호가 입력되지 않았습니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	} else if (user.getUserName() == null) {
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('이름이 입력되지 않았습니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	} else if (user.getUserGender() == null) {
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('성별이 입력되지 않았습니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	} else if (user.getUserEmail() == null) {
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('이메일이 입력되지 않았습니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	} else {
-		UserDAO userDAO = new UserDAO();
-		int result = userDAO.join(user);
-		if (result == -1) {
+		if (userID != null) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('이미 존재하는 아이디입니다.')");
+			script.println("alert('이미 로그인이 되어있습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		}
+
+		if (user.getUserID() == null) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('아이디가 입력되지 않았습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		} else if (user.getUserPassword() == null) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('비밀번호가 입력되지 않았습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		} else if (user.getUserPassword().length()<6 || user.getUserPassword().length()>=12) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('비밀번호 길이를 다시 한번 확인해주세요.')");
+			script.println("history.back()");
+			script.println("</script>");
+		} else if (user.getUserName() == null) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('이름이 입력되지 않았습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		} else if (user.getUserGender() == null) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('성별이 입력되지 않았습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		} else if (user.getUserEmail() == null) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('이메일이 입력되지 않았습니다.')");
 			script.println("history.back()");
 			script.println("</script>");
 		} else {
-			session.setAttribute("userID", user.getUserID());
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("location.href = 'main.jsp'");
-			script.println("</script>");
+			UserDAO userDAO = new UserDAO();
+			int result = userDAO.join(user);
+			if (result == -1) {
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('이미 존재하는 아이디입니다.')");
+				script.println("history.back()");
+				script.println("</script>");
+			} else {
+				session.setAttribute("userID", user.getUserID());
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("location.href = 'main.jsp'");
+				script.println("</script>");
+			}
 		}
-	}
 	%>
 </body>
 </html>

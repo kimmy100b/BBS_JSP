@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.io.PrintWriter"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,12 @@
 <title>JSP 게시판 웹 사이트</title>
 </head>
 <body>
+	<%
+		String userID = null;
+	if (session.getAttribute("userID") != null) {
+		userID = (String) session.getAttribute("userID");
+	}
+	%>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="navbar-header">
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -25,41 +32,66 @@
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item"><a class="nav-link" href="main.jsp">메인</a></li>
-				<li class="nav-item"><a class="nav-link" href="bbs.jsp">게시판</a></li>
+				<li class="nav-item active"><a class="nav-link" href="bbs.jsp">게시판</a></li>
 			</ul>
+			<%
+				if (userID == null) {
+			%>
 			<ul class="navbar-nav  navbar-right">
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
 					role="button" aria-haspopup="true" aria-expanded="false">접속하기</a>
 					<ul class="dropdown-menu">
-						<a class="dropdown-item active" href="login.jsp">로그인</a>
+						<a class="dropdown-item" href="login.jsp">로그인</a>
 						<a class="dropdown-item" href="join.jsp">회원가입</a>
 					</ul></li>
 			</ul>
+			<%
+				} else {
+			%>
+			<ul class="navbar-nav  navbar-right">
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+					role="button" aria-haspopup="true" aria-expanded="false">회원관리</a>
+					<ul class="dropdown-menu">
+						<a class="dropdown-item" href="logoutAction.jsp">로그아웃</a>
+					</ul></li>
+			</ul>
+			<%
+				}
+			%>
 		</div>
 	</nav>
 
 	<div class="container">
-		<div class="col-lg-4"></div>
-		<div class="col-lg-4">
-			<div class="jumbotron" style="padding-top: 20px;">
-				<form method="post" action="loginAction.jsp">
-					<h3 style="text-align: center;">로그인 화면</h3>
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="아이디"
-							name="userID" maxlength="20">
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-control" placeholder="비밀번호"
-							name="userPassword" maxlength="20">
-					</div>
-					<input type="submit" class="btn btn-primary form-control"
-						value="로그인">
-				</form>
-			</div>
+		<div class="row">
+			<form method="post" action="writeAction.jsp" style="width: 100%;">
+				<table class="table table-striped"
+					style="text-align: center; border: 1px solid #dddddd">
+					<thead>
+						<tr>
+							<th colspan="2"
+								style="background-color: #eeeeee; text-align: center;">게시판
+								글쓰기 양식</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" class="form-control"
+								placeholder="제목을 입력하세요" name="bbsTitle" maxlength="50"></td>
+						</tr>
+						<tr>
+							<td><textarea type="text" class="form-control"
+									placeholder="내용을 입력하세요" name="bbsContent" maxlength="2048"
+									style="height: 350px;"></textarea></td>
+						</tr>
+					</tbody>
+				</table>
+				<input type="submit" class="btn btn-primary float-right" value="글쓰기">
+			</form>
 		</div>
-		<div class="col-lg-4"></div>
 	</div>
+
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 		crossorigin="anonymous"></script>
